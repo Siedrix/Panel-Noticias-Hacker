@@ -1,1 +1,4 @@
-Needs a better readme
+ToDos:
+Agregar una explicacion de que hace cada cosa.
+Agregar un Timer que cada hora busque la nueva hora.
+Agregar localstorage para guardar los datos y no tenerlos que pedir cada vez.

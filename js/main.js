@@ -39,10 +39,13 @@ $(document).ready(function(){
 		var app = Sammy(function() {
 			this.get('#/', function() {
 				$( ".panel" ).first().show();
+				$('#tabs a').first().addClass('current');
 			});
 			this.get('#/tabs/:tab', function() {
 				$('.panel').hide();
+				$('.current').removeClass('current');
 				$('#'+this.params['tab']).show();
+				$('#tab'+this.params['tab']).addClass('current')
 			});
 		})
 		

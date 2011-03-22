@@ -39,6 +39,11 @@ li{
     padding: 5px 0;
     text-shadow: 1px 1px 0 white;	
 }
+#tabs .current{
+	color: #577327;
+    cursor: default;
+    font-weight: bold;
+}
 .panel{}
 .posts{
 	margin-bottom:20px;
