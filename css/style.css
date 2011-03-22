@@ -1,0 +1,83 @@
+p,ul{margin:0;padding:0}
+p,span{
+	color:#777777;
+	text-shadow: white 1px 1px 0px;
+}
+body{
+	font-family: trebuchet MS;
+	background:#F2F2F2;
+}
+a{
+	text-decoration:none;
+	color:#4D5F4E;
+}
+h1,h2,h3,h4,h5,h6{
+	color:#577327;
+	text-shadow: white 1px 1px 0px;
+}
+li{
+	list-style: none;
+}
+#wrapper{
+	width:1200px;
+	margin:0 auto;
+}
+#content{
+	float: right;
+	width: 940px;
+}
+#sidebar{
+	float:left;
+	width:200px;
+	text-align:right;
+}
+#tabs{}
+#tabs a{
+	color: #7D8585;
+    display: block;
+    margin: 0 10px;
+    padding: 5px 0;
+    text-shadow: 1px 1px 0 white;	
+}
+.panel{}
+.posts{
+	margin-bottom:20px;
+}
+.post{
+	padding:10px 5px;
+	border-bottom:1px dotted;
+}
+.post:last-child{
+	border:none;
+}
+.delta{
+    display: inline-block;
+    height: 40px;
+    text-align: right;
+    width: 31px;
+	float:left;
+}
+.up{
+	background: url("../images/up-arrow.gif") no-repeat scroll 0 -3px transparent;
+    color: green;
+}
+.down{
+	background: url("../images/down-arrow.gif") no-repeat scroll 0 -3px transparent;
+    color: red;
+}
+.new{
+	background: url("../images/new.png") no-repeat scroll 0 7px transparent;
+}
+.empty{
+	background: url("../images/empty.png") no-repeat scroll 0 7px transparent;
+}
+.main-line{
+    margin-left: 50px;
+}
+.sub-line{
+	font-size: 11px;
+    margin-left: 50px;
+}
+.delta-count{
+	color:green;
+}

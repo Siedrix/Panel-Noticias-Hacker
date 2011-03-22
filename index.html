@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Noticias Hacker Api</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css"/>
+	<script type="text/javascript" src="src/jquery-1.5.1.min.js"></script>
+	<script type="text/javascript" src="src/sammy-latest.min.js"></script>
+	<script type="text/javascript" src="src/underscore-min.js"></script>
+	<script type="text/javascript" src="src/jquery.tmpl.min.js"></script>
+	<script type="text/javascript" src="js/values.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+</head>
+<body>
+<div id="wrapper">
+	<div id="content">
+		<div id="posts"></div>
+	</div>
+	<div id="sidebar">
+		<h1>Noticias Hacker</h1>
+		<div id="tabs"></div>
+	</div>
+<div>
+
+<script id="tabsTemplate" type="text/template">
+	<a href="#/tabs/${title}">${title}</a>
+</script>
+<script id="panelTemplate" type="text/template">
+	<div id="${title}" class="panel" style="display:none">
+		<h2>${title}</h2>
+		<ul class="posts">
+		</ul>
+	</div>
+</script>
+<script id="postTemplate" type="text/template">
+	<li class="post">
+		{{if delta > 0}}
+			<span class="delta up">${delta}</span>
+		{{else delta < 0}}
+			<span class="delta down">${-delta}</span>
+		{{else delta == 'new'}}
+			<span class="delta new"></span>
+		{{else}}
+			<span class="delta empty"></span>
+		{{/if}}
+		<p class="main-line">
+			<a class="title" href="${url}">${title}</a> por ${user}</span>
+		</p>
+		<p class="sub-line">
+			<span class="votes">votos ${votes}{{if votes_delta > 0}}<span class="delta-count">(${votes_delta})</span>{{/if}}</span>
+			<span class="votes">commentarios ${comment_count}{{if comment_delta > 0}}<span class="delta-count">(${comment_delta})</span>{{/if}}</span> 
+		</p>
+	</li>
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11460584-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>
