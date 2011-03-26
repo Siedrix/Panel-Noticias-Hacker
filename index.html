@@ -7,7 +7,6 @@
 	<script type="text/javascript" src="src/sammy-latest.min.js"></script>
 	<script type="text/javascript" src="src/underscore-min.js"></script>
 	<script type="text/javascript" src="src/jquery.tmpl.min.js"></script>
-	<script type="text/javascript" src="js/values.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
@@ -22,10 +21,10 @@
 <div>
 
 <script id="tabsTemplate" type="text/template">
-	<a id="tab${title}" href="#/tabs/${title}">${title}</a>
+	<a id="tab${id}" href="#/tabs/${id}">${label}</a>
 </script>
 <script id="panelTemplate" type="text/template">
-	<div id="${title}" class="panel" style="display:none">
+	<div id="${id}" class="panel" style="display:none">
 		<h2>${title}</h2>
 		<ul class="posts">
 		</ul>
