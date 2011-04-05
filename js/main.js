@@ -1,7 +1,6 @@
 $(document).ready(function(){
 	//init varibles and compile templates
 	var prev = false;
-	var current = false;
 	$("#panelTemplate").template("panel");
 	$("#tabsTemplate").template("tabs");
 	$("#postTemplate").template("post");
@@ -53,9 +52,10 @@ $(document).ready(function(){
 				$.tmpl('tabs',{id:now.getTime(),label:timelabel}).prependTo('#tabs');
 				$.tmpl('panel',{id:now.getTime(),title:timelabel}).prependTo('#posts');
 				_.each(data.posts, function(post,i){
-					post.last = _.detect( current.posts ,function(old){
+					post.last = _.detect( window.current.posts ,function(old){
 						return old.id == post.id; 
 					});		
+					
 					if(post.last){
 						post.delta = post.last.pos - post.pos;
 						post.votes_delta = post.votes - post.last.votes;
@@ -67,6 +67,7 @@ $(document).ready(function(){
 					}		
 					$.tmpl('post',post).appendTo('#'+now.getTime()+' .posts');
 				});
+				window.current = data;
 			});
 		}
 	},60000);
