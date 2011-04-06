@@ -39,7 +39,7 @@ $(document).ready(function(){
 			}
 		});
 		
-		app.run('#/');
+		window.app.run('#/');
 	});
 	
 	setInterval(function(){
@@ -71,19 +71,6 @@ $(document).ready(function(){
 			});
 		}
 	},60000);
-	
-	var app = Sammy(function() {
-		this.get('#/', function() {
-			$( ".panel" ).first().show();
-			$('#tabs a').first().addClass('current');
-		});
-		this.get('#/tabs/:tab', function() {
-			$('.panel').hide();
-			$('.current').removeClass('current');
-			$('#'+this.params['tab']).show();
-			$('#tab'+this.params['tab']).addClass('current')
-		});
-	});
 })
 
 function parseTime(time){
