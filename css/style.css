@@ -111,3 +111,26 @@ li{
 .delta-count{
 	color:green;
 }
+#nav{}
+#refresh{
+	width: 83px;
+	float:right;
+}
+a.grnBtn {
+    background: url("../images/navHovLeftGrn.png") no-repeat scroll left top transparent;
+    color: #FFFFFF;
+    display: block;
+    font-size: 15px;
+    height: 36px;
+    margin-right: 5px;
+    overflow: hidden;
+    padding: 0 0 0 7px;
+}
+a.grnBtn label {
+    background: url("../images/navHovRightGrn.png") no-repeat scroll right top transparent;
+    display: block;
+    line-height: 33px;
+    padding: 0 18px 5px 11px;
+    text-shadow: 0 -1px #333333;
+	font-weight:bold;
+}
