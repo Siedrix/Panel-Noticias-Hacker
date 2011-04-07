@@ -4,6 +4,7 @@ $(document).ready(function(){
 	$("#panelTemplate").template("panel");
 	$("#tabsTemplate").template("tabs");
 	$("#postTemplate").template("post");
+	$("#userTemplate").template("user");
 	
 	$.getJSON('http://hack.org.mx/noticias-hacker/last.php?callback=?',function(data){
 		window.current = data[_(data).chain().keys().max().value()];

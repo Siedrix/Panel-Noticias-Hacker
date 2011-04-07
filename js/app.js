@@ -3,6 +3,10 @@ $(document).ready(function(){
 		location.hash = '/new/current';
 	});
 
+	$('#twitter').click(function(){
+		location.hash = '/twitter/current';
+	});
+
 	window.app = Sammy(function() {
 		this.get('#/', function() {
 			$( ".panel" ).first().show();
@@ -15,9 +19,7 @@ $(document).ready(function(){
 			$('#tab'+this.params['tab']).addClass('current')
 		});
 		this.get('#/new/current',function(){
-			console.log('getting json');
 			$.getJSON('http://www.noticiashacker.com/nuevo.json?callback=?',function(data){
-				console.log('got json');
 				var now = new Date();
 				$.tmpl('panel',{id:now.getTime(),title:'Nuevo'}).prependTo('#posts');
 				_.each(data.posts, function(post,i){
@@ -29,5 +31,15 @@ $(document).ready(function(){
 				$('#'+now.getTime()).show();
 			});
 		});
+		this.get('#/twitter/current',function(){
+			$.getJSON('http://www.noticiashacker.com/api/usuarios/twitter?callback=?',function(data){
+				$.tmpl('panel',{id:'users',title:'users'}).prependTo('#posts');
+				_.each(data.twitter_users,function(user){
+					$.tmpl('user',{'user':user}).appendTo('#users .posts');
+				})
+				$('#users').show();
+			})
+			console.log('hi')
+		})
 	});
 });
