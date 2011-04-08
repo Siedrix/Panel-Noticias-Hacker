@@ -38,12 +38,12 @@ $(document).ready(function(){
 		this.get('#/twitter/current',function(){
 			$('.currentPanel').remove();
 			var now = new Date();
-			Wall.all().filter('from','=','twitter').filter('timestamp','>',now.getTime() - 3600000).order("timestamp", false).one(null, function(results){
+			Twitter.all().filter('timestamp','>',now.getTime() - 3600000).order("timestamp", false).one(null, function(results){
 				if(results){
 					results.display();
 				}else{
 					$.getJSON('http://www.noticiashacker.com/api/usuarios/twitter?callback=?',function(data){
-						var tw = new Wall({from:'twitter',timestamp:now.getTime(),data:data});
+						var tw = new Twitter({timestamp:now.getTime(),data:data});
 						persistence.add(tw);
 						persistence.flush(function(){
 							tw.display();
@@ -55,15 +55,15 @@ $(document).ready(function(){
 		this.get('#/github/current',function(){
 			$('.currentPanel').remove();
 			var now = new Date();
-			Wall.all().filter('from','=','github').filter('timestamp','>',now.getTime() - 3600000).order("timestamp", false).one(null, function(results){
+			Github.all().filter('timestamp','>',now.getTime() - 3600000).order("timestamp", false).one(null, function(results){
 				if(results){
 					results.display();
 				}else{
 					$.getJSON('http://www.noticiashacker.com/api/usuarios/github?callback=?',function(data){
-						var tw = new Wall({from:'github',timestamp:now.getTime(),data:data});
-						persistence.add(tw);
+						var gh = new Github({timestamp:now.getTime(),data:data});
+						persistence.add(gh);
 						persistence.flush(function(){
-							tw.display();
+							gh.display();
 						});
 /*						
 						$.tmpl('panel',{id:'githubers',title:'githubers'}).prependTo('#posts');
