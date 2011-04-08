@@ -1,13 +1,13 @@
 $(document).ready(function(){
-	$('#new').click(function(){
+	$('#newNav').click(function(){
 		location.hash = '/new/current';
 	});
 
-	$('#twitter').click(function(){
+	$('#twitterNav').click(function(){
 		location.hash = '/twitter/current';
 	});
 
-	$('#github').click(function(){
+	$('#githubNav').click(function(){
 		location.hash = '/github/current';
 	});
 
@@ -23,20 +23,32 @@ $(document).ready(function(){
 			$('#tab'+this.params['tab']).addClass('current')
 		});
 		this.get('#/new/current',function(){
-			$.getJSON('http://www.noticiashacker.com/nuevo.json?callback=?',function(data){
-				var now = new Date();
-				$.tmpl('panel',{id:now.getTime(),title:'Nuevo'}).prependTo('#posts');
-				_.each(data.posts, function(post,i){
-					post.delta = 'new';
-					post.comment_delta = 0;
-					post.votes_delta = 0;					
-					$.tmpl('post',post).appendTo('#'+now.getTime()+' .posts');
-				})
-				$('#'+now.getTime()).show();
+			$('.currentPanel').remove();
+			$('.selected').removeClass('selected');
+			var now = new Date();
+			Page.all().filter('timestamp','>',now.getTime() - 1200000).one(null, function(r) { 
+				if(r){
+					r.display();
+				}else{
+				$.getJSON('http://www.noticiashacker.com/nuevo.json?callback=?',function(data){				
+					var nuevo = new Page({timestamp:now.getTime(),from:'nuevo'});
+					persistence.add(nuevo);
+					_.each(data.posts, function(post,i){
+						var post = new Post({title:post.title,timestamp:now.getTime(),from:'nuevo',data:post});	
+						post.page(nuevo);
+						persistence.add(post);
+						//nuevo.posts.add(post);
+					});
+					persistence.flush(function(){
+						nuevo.display()
+					});
+				});
+				}
 			});
 		});
 		this.get('#/twitter/current',function(){
 			$('.currentPanel').remove();
+			$('.selected').removeClass('selected');
 			var now = new Date();
 			Twitter.all().filter('timestamp','>',now.getTime() - 3600000).order("timestamp", false).one(null, function(results){
 				if(results){
@@ -54,6 +66,7 @@ $(document).ready(function(){
 		});
 		this.get('#/github/current',function(){
 			$('.currentPanel').remove();
+			$('.selected').removeClass('selected');
 			var now = new Date();
 			Github.all().filter('timestamp','>',now.getTime() - 3600000).order("timestamp", false).one(null, function(results){
 				if(results){
@@ -65,13 +78,6 @@ $(document).ready(function(){
 						persistence.flush(function(){
 							gh.display();
 						});
-/*						
-						$.tmpl('panel',{id:'githubers',title:'githubers'}).prependTo('#posts');
-						_.each(data.github_users,function(user){
-							$.tmpl('user',{'user':user}).appendTo('#githubers .posts');
-						})
-						$('#githubers').show();
-*/
 					})						
 				}
 			});

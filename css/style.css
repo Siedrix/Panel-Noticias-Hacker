@@ -51,6 +51,7 @@ li{
 	width:100px;
 }
 #tabs{
+	min-height:400px;
 	text-align: right;
 	background:#ddd;
 	border-radius: 7px;

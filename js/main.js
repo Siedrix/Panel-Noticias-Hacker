@@ -73,20 +73,3 @@ $(document).ready(function(){
 */
 })
 
-function parseTime(time){
-	var date = new Date(time);
-	var hr = date.getHours();
-	if(hr > 11){
-		return date.getHours() - 12 +':'+parseMinutes(date.getMinutes())+'pm';
-	}else{
-		return date.getHours()+':'+parseMinutes(date.getMinutes())+'am';
-	}
-}
-
-function parseMinutes(minutes){
-	if(minutes < 9){
-		return '0' + minutes;
-	}else{
-		return minutes;
-	}
-}
