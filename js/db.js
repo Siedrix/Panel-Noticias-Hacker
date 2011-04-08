@@ -29,7 +29,7 @@
 	//Pages Model
 	window.Page = persistence.define('Page', {
 		from:'TEXT',
-		timestamp:'TEXT',
+		timestamp:'INT',
 	});
 	Page.hasMany('posts', Post, 'page');
 	
@@ -42,13 +42,13 @@
 		});
 		$('#new').show().addClass('currentPanel');			
 		$('#newNav').addClass('selected');		
-		renderSidebar('pages');
+		renderSidebar('new');
 	}
 
 	
 	//Twitter Model
 	window.Twitter = persistence.define('Twitter', {
-		timestamp: "TEXT",
+		timestamp: "INT",
 		data: "JSON"
 	});
 	
@@ -64,7 +64,7 @@
 	
 	//Github Model
 	window.Github = persistence.define('Github', {
-		timestamp: "TEXT",
+		timestamp: "INT",
 		data: "JSON"
 	});	
 	

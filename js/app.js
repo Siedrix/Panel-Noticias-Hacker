@@ -82,5 +82,20 @@ $(document).ready(function(){
 				}
 			});
 		});
+		this.get('#/historic/new/:timestamp',function(){
+			Page.all().filter('from','=','nuevo').filter('timestamp','=',this.params['timestamp']).one(null,function(r){
+				r.display();
+			})
+		});
+		this.get('#/historic/twitter/:timestamp',function(){
+			Twitter.all().filter('timestamp','=',this.params['timestamp']).one(null,function(r){
+				r.display();
+			})
+		});
+		this.get('#/historic/github/:timestamp',function(){
+			Github.all().filter('timestamp','=',this.params['timestamp']).one(null,function(r){
+				r.display();
+			})
+		})
 	});
 });

@@ -1,33 +1,35 @@
 function renderSidebar(type){
 	$('#tabs').html('');
-	if(type == "pages"){
-		Page.all().list(null,function(r){
+	if(type == "new"){
+		Page.all().filter('from','=','nuevo').list(null,function(r){
 			_.each(r,function(r){
-				var time = new Date();
-				time.setTime(r.timestamp());
+				var time = strToDate(r.timestamp());	
 				var timelabel = parseTime(time);
-				$.tmpl('tabs',{id:r.timestamp(),label:timelabel}).prependTo('#tabs');
+				$.tmpl('tabs',{id:time,type:type,label:timelabel}).prependTo('#tabs');
 			});
 		})
 	}else if(type == "twitter"){
 		Twitter.all().list(null,function(r){
 			_.each(r,function(r){
-				var time = new Date();
-				time.setTime(r.timestamp());			
+				var time = strToDate(r.timestamp());	
 				var timelabel = parseTime(time);
-				$.tmpl('tabs',{id:r.timestamp(),label:timelabel}).prependTo('#tabs');
+				$.tmpl('tabs',{id:time,type:type,label:timelabel}).prependTo('#tabs');
 			});
 		})
 	}else if(type == "github"){
 		Github.all().list(null,function(r){
 			_.each(r,function(r){
-				var time = new Date();
-				time.setTime(r.timestamp());			
+				var time = strToDate(r.timestamp());	
 				var timelabel = parseTime(time);
-				$.tmpl('tabs',{id:r.timestamp(),label:timelabel}).prependTo('#tabs');
+				$.tmpl('tabs',{id:time,type:type,label:timelabel}).prependTo('#tabs');
 			});
 		})		
 	}
+}
+
+function strToDate(str){
+	var time = new Date();
+	return time.setTime(str);
 }
 
 function parseTime(time){

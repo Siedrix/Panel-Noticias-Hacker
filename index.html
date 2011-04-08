@@ -35,7 +35,7 @@
 	<div id="sidebar">
 		<h1>Noticias Hacker</h1>
 		<ul id="subjects">
-			<li id="homeNav" class="selected">Home</li>
+			<li id="homeNav">Home</li>
 			<li id="newNav">Nuevo</li>
 			<li id="twitterNav">Usuarios de Twitter</li>
 			<li id="githubNav">Usuarios de Github</li>
@@ -47,7 +47,7 @@
 <div>
 
 <script id="tabsTemplate" type="text/template">
-	<a id="tab${id}" href="#/tabs/${id}">${label}</a>
+	<a id="tab${id}" href="#/historic/${type}/${id}">${label}</a>
 </script>
 <script id="panelTemplate" type="text/template">
 	<div id="${id}" class="panel" style="display:none">
