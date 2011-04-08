@@ -42,7 +42,7 @@
 		});
 		$('#new').show().addClass('currentPanel');			
 		$('#newNav').addClass('selected');		
-		renderSidebar('new');
+		renderSidebar('new',this.timestamp());
 	}
 
 	
@@ -57,9 +57,9 @@
 		_.each(this.data().twitter_users,function(user){
 			$.tmpl('user',{'user':user}).appendTo('#twitters .posts');
 		});
-		$('#twitters').show().addClass('currentPanel');			
+		$('#twitters').show().addClass('currentPanel');
 		$('#twitterNav').addClass('selected');
-		renderSidebar('twitter');
+		renderSidebar('twitter',this.timestamp());
 	}
 	
 	//Github Model
@@ -75,7 +75,7 @@
 		});
 		$('#github').show().addClass('currentPanel');				
 		$('#githubNav').addClass('selected');
-		renderSidebar('github');
+		renderSidebar('github',this.timestamp());
 	}
 	
 	persistence.schemaSync(function(){

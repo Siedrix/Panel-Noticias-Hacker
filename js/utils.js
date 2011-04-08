@@ -1,4 +1,4 @@
-function renderSidebar(type){
+function renderSidebar(type,focus){
 	$('#tabs').html('');
 	if(type == "new"){
 		Page.all().filter('from','=','nuevo').list(null,function(r){
@@ -6,6 +6,7 @@ function renderSidebar(type){
 				var time = strToDate(r.timestamp());	
 				var timelabel = parseTime(time);
 				$.tmpl('tabs',{id:time,type:type,label:timelabel}).prependTo('#tabs');
+				$('#tab'+focus).addClass('current');
 			});
 		})
 	}else if(type == "twitter"){
@@ -14,6 +15,7 @@ function renderSidebar(type){
 				var time = strToDate(r.timestamp());	
 				var timelabel = parseTime(time);
 				$.tmpl('tabs',{id:time,type:type,label:timelabel}).prependTo('#tabs');
+				$('#tab'+focus).addClass('current');
 			});
 		})
 	}else if(type == "github"){
@@ -22,6 +24,7 @@ function renderSidebar(type){
 				var time = strToDate(r.timestamp());	
 				var timelabel = parseTime(time);
 				$.tmpl('tabs',{id:time,type:type,label:timelabel}).prependTo('#tabs');
+				$('#tab'+focus).addClass('current');
 			});
 		})		
 	}
