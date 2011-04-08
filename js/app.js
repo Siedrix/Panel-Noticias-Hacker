@@ -7,6 +7,10 @@ $(document).ready(function(){
 		location.hash = '/twitter/current';
 	});
 
+	$('#github').click(function(){
+		location.hash = '/github/current';
+	});
+
 	window.app = Sammy(function() {
 		this.get('#/', function() {
 			$( ".panel" ).first().show();
@@ -32,14 +36,45 @@ $(document).ready(function(){
 			});
 		});
 		this.get('#/twitter/current',function(){
-			$.getJSON('http://www.noticiashacker.com/api/usuarios/twitter?callback=?',function(data){
-				$.tmpl('panel',{id:'users',title:'users'}).prependTo('#posts');
-				_.each(data.twitter_users,function(user){
-					$.tmpl('user',{'user':user}).appendTo('#users .posts');
-				})
-				$('#users').show();
-			})
-			console.log('hi')
-		})
+			$('.currentPanel').remove();
+			var now = new Date();
+			Wall.all().filter('from','=','twitter').filter('timestamp','>',now.getTime() - 3600000).order("timestamp", false).one(null, function(results){
+				if(results){
+					results.display();
+				}else{
+					$.getJSON('http://www.noticiashacker.com/api/usuarios/twitter?callback=?',function(data){
+						var tw = new Wall({from:'twitter',timestamp:now.getTime(),data:data});
+						persistence.add(tw);
+						persistence.flush(function(){
+							tw.display();
+						});
+					});
+				}
+			});
+		});
+		this.get('#/github/current',function(){
+			$('.currentPanel').remove();
+			var now = new Date();
+			Wall.all().filter('from','=','github').filter('timestamp','>',now.getTime() - 3600000).order("timestamp", false).one(null, function(results){
+				if(results){
+					results.display();
+				}else{
+					$.getJSON('http://www.noticiashacker.com/api/usuarios/github?callback=?',function(data){
+						var tw = new Wall({from:'github',timestamp:now.getTime(),data:data});
+						persistence.add(tw);
+						persistence.flush(function(){
+							tw.display();
+						});
+/*						
+						$.tmpl('panel',{id:'githubers',title:'githubers'}).prependTo('#posts');
+						_.each(data.github_users,function(user){
+							$.tmpl('user',{'user':user}).appendTo('#githubers .posts');
+						})
+						$('#githubers').show();
+*/
+					})						
+				}
+			});
+		});
 	});
 });

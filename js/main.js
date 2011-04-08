@@ -5,7 +5,7 @@ $(document).ready(function(){
 	$("#tabsTemplate").template("tabs");
 	$("#postTemplate").template("post");
 	$("#userTemplate").template("user");
-	
+/*	
 	$.getJSON('http://hack.org.mx/noticias-hacker/last.php?callback=?',function(data){
 		window.current = data[_(data).chain().keys().max().value()];
 		_.each(data,function(item,j){if(item){_.each(item.posts,function(post,i){post.pos = i + 1;});}});
@@ -39,8 +39,6 @@ $(document).ready(function(){
 				prev = {key : timelabel,item : item};
 			}
 		});
-		
-		window.app.run('#/');
 	});
 	
 	setInterval(function(){
@@ -72,6 +70,7 @@ $(document).ready(function(){
 			});
 		}
 	},60000);
+*/
 })
 
 function parseTime(time){

@@ -11,10 +11,10 @@
 	
 	<!-- persistence src !-->
 	<script src="src/persistence.js"></script>
-    <script src="src/persistence.store.sql.js"></script>
-    <script src="src/persistence.store.websql.js"></script>
-    <script src="src/persistence.store.memory.js"></script>
-	<script src="src/persistence.jquery.js"></script>		
+	<script src="src/persistence.store.sql.js"></script>
+	<script src="src/persistence.store.websql.js"></script>
+	<script src="src/persistence.store.memory.js"></script>
+	<script src="src/persistence.jquery.js"></script>
 	
 	<!-- app js !-->
 	<script type="text/javascript" src="js/app.js"></script>
@@ -37,6 +37,7 @@
 			<li id="home" class="selected">Home</li>
 			<li id="new">Nuevo</li>
 			<li id="twitter">Usuarios de Twitter</li>
+			<li id="github">Usuarios de Github</li>
 		</ul>
 	</div>
 	<div id="subsidebar">
@@ -55,9 +56,7 @@
 	</div>
 </script>
 <script id="userTemplate" type="text/template">
-	<div>
-		<a href="http://twitter.com/${user}" target="_blank">${user}</a>
-	</div>
+	<div>${user}</div>
 </script>
 <script id="postTemplate" type="text/template">
 	<li class="post">
