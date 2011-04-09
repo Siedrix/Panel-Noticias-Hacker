@@ -1,10 +1,13 @@
 ToDos:
 Agregar una explicacion de que hace cada cosa.
-Agregar localstorage para guardar los datos y no tenerlos que pedir cada vez.
+Comparar post con el post anterior en home.
 Comparar nuevos con la vez anterior que se mostraron.
+Comparar twitter users a la vez anterior para tener los nuevos usuarios que tienen twitter.
+Comparar github users a la vez anterior para tener los nuevos usuarios que tienen github.
 Subscripcion a un tema.
-Poder refrescar las distintas urls.
+Mostrar perfiles de usuarios.
 
 ToDos Done
+Agregar localstorage para guardar los datos y no tenerlos que pedir cada vez.
 Agregar un Timer que cada hora busque la nueva hora.
 Ver nuevos.
