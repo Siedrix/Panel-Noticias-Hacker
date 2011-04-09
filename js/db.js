@@ -34,15 +34,17 @@
 	Page.hasMany('posts', Post, 'page');
 	
 	Page.prototype.display = function(){
-		$.tmpl('panel',{id:'new',title:'Nuevo'}).prependTo('#posts');
+		type = this.from();
+		console.log(type);
+		$.tmpl('panel',{id:this.from(),title:'Nuevo'}).prependTo('#posts');
 		this.posts().list(null,function(r){
 			_.each(r,function(post){
-				$.tmpl('post',post.toJson()).appendTo('#new .posts');
+				$.tmpl('post',post.toJson()).appendTo('#'+type+' .posts');
 			})
 		});
-		$('#new').show().addClass('currentPanel');			
-		$('#newNav').addClass('selected');		
-		renderSidebar('new',this.timestamp());
+		$('#'+this.from()).show().addClass('currentPanel');			
+		$('#'+this.from()+'Nav').addClass('selected');		
+		renderSidebar(this.from(),this.timestamp());
 	}
 
 	
@@ -79,7 +81,9 @@
 	}
 	
 	persistence.schemaSync(function(){
-		window.app.run('#/');
+		syncHome(function(){
+			window.app.run('#/');
+		});
 	});
 	
 });

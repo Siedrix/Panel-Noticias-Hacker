@@ -1,7 +1,58 @@
+function syncHome(callback){
+	Page.all().filter('from','=','home').order("timestamp", false).one(null,function(r){
+		if(r){
+			console.log('fetching to last.php all stamps after:'+r.timestamp());
+			var now = new Date();
+			var hr = Math.floor((now.getTime() - r.timestamp())/3600000);
+			$.getJSON('http://hack.org.mx/noticias-hacker/last.php?limit='+hr+'&callback=?',function(data){
+				_.each(data,function(item,time){
+					if(time * 1000 > r.timestamp()){
+						var home = new Page({timestamp:time*1000,from:'home'});
+						persistence.add(home);
+						_.each(item.posts, function(post,i){
+							var post = new Post({title:post.title,timestamp:time*1000,from:'home',data:post});	
+							post.page(home);
+							persistence.add(post);				
+						});
+					}
+					persistence.flush(function(){
+						callback();
+					});
+				});
+			});
+		}else{
+			$.getJSON('http://hack.org.mx/noticias-hacker/last.php?callback=?',function(data){
+				console.log('fetching to last.php');
+				_.each(data,function(item,time){
+					var home = new Page({timestamp:time*1000,from:'home'});
+					persistence.add(home);
+					_.each(item.posts, function(post,i){
+						var post = new Post({title:post.title,timestamp:time*1000,from:'home',data:post});	
+						post.page(home);
+						persistence.add(post);				
+					});
+				});
+				persistence.flush(function(){
+					callback();
+				});
+			});		
+		}
+	});
+}
+
 function renderSidebar(type,focus){
 	$('#tabs').html('');
-	if(type == "new"){
+	if(type == "nuevo"){
 		Page.all().filter('from','=','nuevo').list(null,function(r){
+			_.each(r,function(r){
+				var time = strToDate(r.timestamp());	
+				var timelabel = parseTime(time);
+				$.tmpl('tabs',{id:time,type:type,label:timelabel}).prependTo('#tabs');
+				$('#tab'+focus).addClass('current');
+			});
+		})
+	}else if(type == "home"){
+		Page.all().filter('from','=','home').list(null,function(r){
 			_.each(r,function(r){
 				var time = strToDate(r.timestamp());	
 				var timelabel = parseTime(time);

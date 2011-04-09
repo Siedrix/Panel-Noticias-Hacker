@@ -1,22 +1,21 @@
 $(document).ready(function(){
-	$('#newNav').click(function(){
-		location.hash = '/new/current';
-	});
-
-	$('#twitterNav').click(function(){
-		location.hash = '/twitter/current';
-	});
-
-	$('#githubNav').click(function(){
-		location.hash = '/github/current';
-	});
+	$('#homeNav').click(function(){location.hash = '/home/current';});
+	$('#nuevoNav').click(function(){location.hash = '/new/current';});
+	$('#twitterNav').click(function(){location.hash = '/twitter/current';});
+	$('#githubNav').click(function(){location.hash = '/github/current';});
 
 	window.app = Sammy(function() {
 		this.get('#/', function() {
-			$( ".panel" ).first().show();
-			$('#tabs a').first().addClass('current');
+			alert('hi');
 		});
-		this.get('#/tabs/:tab', function() {
+		this.get('#/home/current', function(){
+			$('.currentPanel').remove();
+			$('.selected').removeClass('selected');
+			Page.all().filter('from','=','home').order("timestamp", false).one(null,function(r){
+				r.display();
+			});
+		});
+		this.get('#/tabs/:tab', function(){
 			$('.panel').hide();
 			$('.current').removeClass('current');
 			$('#'+this.params['tab']).show();
@@ -26,7 +25,7 @@ $(document).ready(function(){
 			$('.currentPanel').remove();
 			$('.selected').removeClass('selected');
 			var now = new Date();
-			Page.all().filter('timestamp','>',now.getTime() - 1200000).one(null, function(r) { 
+			Page.all().filter('from','=','nuevo').filter('timestamp','>',now.getTime() - 1200000).one(null, function(r) { 
 				if(r){
 					r.display();
 				}else{
@@ -37,7 +36,6 @@ $(document).ready(function(){
 						var post = new Post({title:post.title,timestamp:now.getTime(),from:'nuevo',data:post});	
 						post.page(nuevo);
 						persistence.add(post);
-						//nuevo.posts.add(post);
 					});
 					persistence.flush(function(){
 						nuevo.display()
@@ -82,7 +80,12 @@ $(document).ready(function(){
 				}
 			});
 		});
-		this.get('#/historic/new/:timestamp',function(){
+		this.get('#/historic/home/:timestamp',function(){
+			Page.all().filter('from','=','home').filter('timestamp','=',this.params['timestamp']).one(null,function(r){
+				r.display();
+			})
+		});
+		this.get('#/historic/nuevo/:timestamp',function(){
 			Page.all().filter('from','=','nuevo').filter('timestamp','=',this.params['timestamp']).one(null,function(r){
 				r.display();
 			})

@@ -32,6 +32,7 @@ li{
 	text-align:right;
 }
 #sidebar h1,#sidebar ul li{
+	margin:5px 0;
 	padding-right:10px
 }
 #subjects{
