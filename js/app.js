@@ -11,7 +11,7 @@ $(document).ready(function(){
 		});
 		this.get('#/home/current', function(){
 			$('.currentPanel').remove();
-			$('.selected').removeClass('selected');
+			$('.selected').removeClass('selected');		
 			Page.all().filter('from','=','home').order("timestamp", false).one(null,function(r){
 				r.display();
 			});
@@ -82,21 +82,29 @@ $(document).ready(function(){
 			});
 		});
 		this.get('#/historic/home/:timestamp',function(){
+			$('.currentPanel').remove();
+			$('.selected').removeClass('selected');		
 			Page.all().filter('from','=','home').filter('timestamp','=',this.params['timestamp']).one(null,function(r){
 				r.display();
 			})
 		});
 		this.get('#/historic/nuevo/:timestamp',function(){
+			$('.currentPanel').remove();
+			$('.selected').removeClass('selected');		
 			Page.all().filter('from','=','nuevo').filter('timestamp','=',this.params['timestamp']).one(null,function(r){
 				r.display();
 			})
 		});
 		this.get('#/historic/twitter/:timestamp',function(){
+			$('.currentPanel').remove();
+			$('.selected').removeClass('selected');		
 			Twitter.all().filter('timestamp','=',this.params['timestamp']).one(null,function(r){
 				r.display();
 			})
 		});
 		this.get('#/historic/github/:timestamp',function(){
+			$('.currentPanel').remove();
+			$('.selected').removeClass('selected');		
 			Github.all().filter('timestamp','=',this.params['timestamp']).one(null,function(r){
 				r.display();
 			})
