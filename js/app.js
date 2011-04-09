@@ -6,7 +6,8 @@ $(document).ready(function(){
 
 	window.app = Sammy(function() {
 		this.get('#/', function() {
-			alert('hi');
+			console.log('needs a home');
+			location.hash = '/home/current';
 		});
 		this.get('#/home/current', function(){
 			$('.currentPanel').remove();

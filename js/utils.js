@@ -1,7 +1,7 @@
 function syncHome(callback){
 	Page.all().filter('from','=','home').order("timestamp", false).one(null,function(r){
 		if(r){
-			console.log('fetching to last.php all stamps after:'+r.timestamp());
+			console.log('items on db');
 			var now = new Date();
 			var hr = Math.floor((now.getTime() - r.timestamp())/3600000);
 			$.getJSON('http://hack.org.mx/noticias-hacker/last.php?limit='+hr+'&callback=?',function(data){
@@ -21,13 +21,14 @@ function syncHome(callback){
 				});
 			});
 		}else{
+			console.log('brand new db');
 			$.getJSON('http://hack.org.mx/noticias-hacker/last.php?callback=?',function(data){
-				console.log('fetching to last.php');
+				console.log(data);
 				_.each(data,function(item,time){
 					var home = new Page({timestamp:time*1000,from:'home'});
 					persistence.add(home);
 					_.each(item.posts, function(post,i){
-						var post = new Post({title:post.title,timestamp:time*1000,from:'home',data:post});	
+						var post = new Post({title:post.title,timestamp:time*1000,from:'home',data:post});
 						post.page(home);
 						persistence.add(post);				
 					});

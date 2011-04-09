@@ -6,6 +6,7 @@ Comparar twitter users a la vez anterior para tener los nuevos usuarios que tien
 Comparar github users a la vez anterior para tener los nuevos usuarios que tienen github.
 Subscripcion a un tema.
 Mostrar perfiles de usuarios.
+Agregar variable de estado para no refrescar cuando no se necesite
 
 ToDos Done
 Agregar localstorage para guardar los datos y no tenerlos que pedir cada vez.
